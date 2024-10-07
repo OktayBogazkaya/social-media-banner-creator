@@ -15,6 +15,11 @@ BANNER_SIZES = {
     "LinkedIn": (1584, 396),
 }
 
+# Function to fetch the usernames from the sheet
+def fetch_usernames():
+    df = pd.read_csv(SHEET_URL)
+    return df['custom_redirect'].dropna().unique()
+
 # Fetch user data from Google Sheets
 def get_user_data(username):
     # Read the published Google Sheet
@@ -174,8 +179,13 @@ st.markdown(
     "This mini-app generates social media banners based on your latest stock analysis. Made by [RhinoInsight](https://twitter.com/rhinoinsight)."
 )
 
-# Get user input for username and template choice
-username = st.text_input("Enter your Substack/Beehiiv/PersonalBlog handle (without @):")
+# Fetch usernames from the Google Sheet
+usernames = fetch_usernames()
+
+# Add a search/selection option for the usernames
+username = st.selectbox("Select or search for your Substack/Beehiiv/PersonalBlog handle (without @):", usernames)
+
+# Get user template choice 
 template_choice = st.selectbox("Choose a banner template:", ["Temp_1", "Temp_2", "Temp_3"])
 
 # Define multiple template URLs for different platforms
