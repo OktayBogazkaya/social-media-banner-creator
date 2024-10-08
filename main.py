@@ -13,6 +13,7 @@ SHEET_URL = st.secrets['google_sheet_url']
 BANNER_SIZES = {
     "Twitter": (1500, 500),
     "LinkedIn": (1584, 396),
+    "Substack": (1110, 220)
 }
 
 # Function to fetch the usernames from the sheet
@@ -73,31 +74,35 @@ def create_banner(user_data, template_url, platform):
     response = requests.get(template_url)
     template_image = Image.open(BytesIO(response.content))
     
-    # Set logo size and gap between logos
-    logo_size = 96
+    # Set gap between logos
     gap = 150
 
     # Get logos and stock titles
     logos = user_data['logos']
     stock_titles = user_data['stock_titles']
 
+    # Offsets and properties for text, logo placement, and logo size by platform
+    platform_offsets = {
+        "Twitter": {"text_offset_x": 0, "text_offset_y": 0, "logo_offset_x": 0, "logo_offset_y": 50, "logo_size": 96, "font_scale": 0.6, "thickness": 2, "text_top_padding": 80},
+        "LinkedIn": {"text_offset_x": 0, "text_offset_y": 10, "logo_offset_x": 0, "logo_offset_y": 40, "logo_size": 96, "font_scale": 0.6, "thickness": 2, "text_top_padding": 70},
+        "Substack": {"text_offset_x": -40, "text_offset_y": 30, "logo_offset_x": -40, "logo_offset_y": 30, "logo_size": 48, "font_scale": 0.5, "thickness": 1, "text_top_padding": 20}
+    }
+
+    # Get platform-specific properties
+    logo_size = platform_offsets[platform]["logo_size"]
+    font_scale = platform_offsets[platform]["font_scale"]
+    thickness = platform_offsets[platform]["thickness"]
+    text_top_padding = platform_offsets[platform]["text_top_padding"]
+    text_offset_x = platform_offsets[platform]["text_offset_x"]
+    text_offset_y = platform_offsets[platform]["text_offset_y"]
+    logo_offset_x = platform_offsets[platform]["logo_offset_x"]
+    logo_offset_y = platform_offsets[platform]["logo_offset_y"]
+
     # Calculate total width occupied by all logos and gaps
     total_logos_width = len(logos) * logo_size + (len(logos) - 1) * gap
 
     # Start position of the first logo (center all logos horizontally)
     start_x = (template_image.width - total_logos_width) // 2 + 50
-
-    # Offsets for text and logo placement by platform
-    platform_offsets = {
-        "Twitter": {"text_offset_x": 0, "text_offset_y": 0, "logo_offset_x": 0, "logo_offset_y": 50},
-        "LinkedIn": {"text_offset_x": 0, "text_offset_y": 0, "logo_offset_x": 0, "logo_offset_y": 50}
-    }
-
-    # Get platform-specific offsets
-    text_offset_x = platform_offsets[platform]["text_offset_x"]
-    text_offset_y = platform_offsets[platform]["text_offset_y"]
-    logo_offset_x = platform_offsets[platform]["logo_offset_x"]
-    logo_offset_y = platform_offsets[platform]["logo_offset_y"]
 
     # Draw logos
     for i, logo_url in enumerate(logos):
@@ -125,15 +130,8 @@ def create_banner(user_data, template_url, platform):
     # Convert PIL Image to OpenCV format for text rendering
     banner_cv = cv2.cvtColor(np.array(template_image), cv2.COLOR_RGB2BGR)
 
-    # Set base font size based on platform (adjust these values as needed)
-    if platform == "Twitter":
-        font_scale = 0.6
-    else:
-        font_scale = 0.6
-    # Set thickness of the text, space between the name, ticker, logo 
-    thickness = 2
+    # Set base font size based on platform
     ticker_spacing = 5
-    text_top_padding = 80
 
     # Load font
     font = cv2.FONT_HERSHEY_SIMPLEX
@@ -192,15 +190,18 @@ template_choice = st.selectbox("Choose a banner template:", ["Temp_1", "Temp_2",
 TEMPLATE_URLS = {
     "Temp_1": [
         "https://ucarecdn.com/e68a294b-16bd-4552-a59b-00e49b1f7338/banner_temp1_twitter_substack.png",
-        "https://ucarecdn.com/f34a04bf-c180-4358-9bb5-6adc3c655c60/banner_temp1_linkedin_substack.png" 
+        "https://ucarecdn.com/f34a04bf-c180-4358-9bb5-6adc3c655c60/banner_temp1_linkedin_substack.png",
+        "https://ucarecdn.com/facfa1d1-6c8f-47f4-a390-053f2d20bbb9/banner_temp1_substack_emailheader.png" 
     ],
     "Temp_2": [
          "https://ucarecdn.com/735dae47-577a-4b29-a229-7e579eb5b6c9/banner_temp2_twitter_substack.png",
-         "https://ucarecdn.com/4f77976e-bf2c-48ee-81d5-a5f684eb45b5/banner_temp2_linkedin_substack.png"
+         "https://ucarecdn.com/4f77976e-bf2c-48ee-81d5-a5f684eb45b5/banner_temp2_linkedin_substack.png",
+         "https://ucarecdn.com/e6ed0d6b-76a4-4aee-b3ec-01a360e93d3b/banner_temp2_substack_emailheader.png"
     ],
     "Temp_3": [
         "https://ucarecdn.com/34f8f4fe-5a0a-46e3-afd4-855339c1bbaf/banner_temp3_twitter_substack.png",
-        "https://ucarecdn.com/363834b7-6e60-4666-8931-c154a59ef3cc/banner_temp3_linkedin_substack.png"
+        "https://ucarecdn.com/363834b7-6e60-4666-8931-c154a59ef3cc/banner_temp3_linkedin_substack.png",
+        "https://ucarecdn.com/6e838ce8-736d-4c3c-b2e9-c6b474b08d50/banner_temp3_substack_emailheader.png"
     ],
 }
 
@@ -216,7 +217,7 @@ if st.button("Create Banner", type="primary"):
                 template_link = TEMPLATE_URLS[template_choice]
 
                 # Create banners for Twitter and LinkedIn using the selected template
-                platforms = ["Twitter", "LinkedIn"]
+                platforms = ["Twitter", "LinkedIn", "Substack"]
                 for i, platform in enumerate(platforms):
                     template = template_link[i]  # Use the corresponding template for each platform
                     banner = create_banner(user_data, template, platform)
