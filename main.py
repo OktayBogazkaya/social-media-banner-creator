@@ -166,6 +166,12 @@ def create_banner(user_data, template_url, platform):
     return Image.fromarray(cv2.cvtColor(banner_cv, cv2.COLOR_BGR2RGB))
 
 # Configure and render Streamlit page
+st.logo(
+    "https://ucarecdn.com/73d8d6e6-132f-44e3-8905-9d47e10093c6/Logo.png",
+    link="https://x.com/RhinoInsight",
+    icon_image="https://ucarecdn.com/73d8d6e6-132f-44e3-8905-9d47e10093c6/Logo.png",
+)
+
 st.set_page_config(
     page_title="RhinoFolio",
     page_icon="🎞️",
@@ -174,7 +180,7 @@ st.set_page_config(
     )
 st.title("Social Media Banner Creator")
 st.markdown(
-    "This mini-app generates social media banners based on your latest stock analysis. Made by [RhinoInsight](https://twitter.com/rhinoinsight)."
+    "This app generates social media banners based on your latest stock analysis. Made by [RhinoInsight](https://twitter.com/rhinoinsight)."
 )
 
 # Fetch usernames from the Google Sheet
