@@ -205,9 +205,9 @@ TEMPLATE_URLS = {
          "https://ucarecdn.com/e6ed0d6b-76a4-4aee-b3ec-01a360e93d3b/banner_temp2_substack_emailheader.png"
     ],
     "Temp_3": [
-        "https://ucarecdn.com/34f8f4fe-5a0a-46e3-afd4-855339c1bbaf/banner_temp3_twitter_substack.png",
-        "https://ucarecdn.com/363834b7-6e60-4666-8931-c154a59ef3cc/banner_temp3_linkedin_substack.png",
-        "https://ucarecdn.com/6e838ce8-736d-4c3c-b2e9-c6b474b08d50/banner_temp3_substack_emailheader.png"
+        "https://ucarecdn.com/0ec5e2e8-1cac-465c-9872-bda9ccf21764/banner_temp3_twitter_substack.png",
+        "https://ucarecdn.com/3a3bd0f1-3a23-41a1-98a7-c09d4313c028/banner_temp3_linkedin_substack.png",
+        "https://ucarecdn.com/1749cf6a-385b-4624-9f59-53620d2c9115/banner_temp3_substack_emailheader.png"
     ],
 }
 
