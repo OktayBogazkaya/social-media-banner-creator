@@ -18,7 +18,7 @@
 </div>
 <div align="center">
 
-[<img src="./public/button-buy-me-a-coffee.png" width="180" alt="Buy me a coffee button"/>](https://buymeacoffee.com/rhinoinsightt)
+[<img src="./public/button-buy-me-a-coffee.png" width="180" alt="Buy me a coffee button"/>](https://buymeacoffee.com/rhinoinsight)
 
 </div>
 
