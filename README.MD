@@ -34,7 +34,7 @@ See [ROADMAP.md](./ROADMAP.md).
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
 
-# Contact
+## Contact
 
 If you have any questions or suggestions, feel free to contact me at [RhinoInsight](https://x.com/RhinoInsight).
 
