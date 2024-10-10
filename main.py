@@ -84,8 +84,8 @@ def create_banner(user_data, template_url, platform):
     # Offsets and properties for text, logo placement, and logo size by platform
     platform_offsets = {
         "Twitter": {"text_offset_x": 0, "text_offset_y": 0, "logo_offset_x": 0, "logo_offset_y": 50, "logo_size": 96, "font_scale": 0.6, "thickness": 2, "text_top_padding": 80},
-        "LinkedIn": {"text_offset_x": 0, "text_offset_y": 10, "logo_offset_x": 0, "logo_offset_y": 40, "logo_size": 96, "font_scale": 0.6, "thickness": 2, "text_top_padding": 70},
-        "Substack": {"text_offset_x": -40, "text_offset_y": 30, "logo_offset_x": -40, "logo_offset_y": 30, "logo_size": 48, "font_scale": 0.5, "thickness": 1, "text_top_padding": 20}
+        "LinkedIn": {"text_offset_x": -30, "text_offset_y": 10, "logo_offset_x": -30, "logo_offset_y": 40, "logo_size": 96, "font_scale": 0.6, "thickness": 2, "text_top_padding": 70},
+        "Substack": {"text_offset_x": -30, "text_offset_y": 30, "logo_offset_x": -30, "logo_offset_y": 30, "logo_size": 48, "font_scale": 0.5, "thickness": 1, "text_top_padding": 20}
     }
 
     # Get platform-specific properties
@@ -190,25 +190,35 @@ usernames = fetch_usernames()
 username = st.selectbox("Select or search for your Substack/Beehiiv/PersonalBlog handle (without @):", usernames)
 
 # Get user template choice 
-template_choice = st.selectbox("Choose a banner template:", ["Temp_1", "Temp_2", "Temp_3"])
+template_choice = st.selectbox("Choose a banner template:", ["Temp_1", "Temp_2", "Temp_3", "Temp_4", "Temp_5 (Japan Special)"])
 
 # Define multiple template URLs for different platforms
 TEMPLATE_URLS = {
     "Temp_1": [
-        "https://ucarecdn.com/e68a294b-16bd-4552-a59b-00e49b1f7338/banner_temp1_twitter_substack.png",
-        "https://ucarecdn.com/f34a04bf-c180-4358-9bb5-6adc3c655c60/banner_temp1_linkedin_substack.png",
-        "https://ucarecdn.com/facfa1d1-6c8f-47f4-a390-053f2d20bbb9/banner_temp1_substack_emailheader.png" 
+        "https://ucarecdn.com/3afd4185-49b5-4e50-aac4-e325fb350e76/banner_temp1_twitter_substack.png",
+        "https://ucarecdn.com/33b155a6-8b6d-4b1f-bd8c-c02383a461e7/banner_temp1_linkedin_substack.png",
+        "https://ucarecdn.com/ca0fe56f-a1b0-4da6-93f6-f3a3113952e1/banner_temp1_substack_email.png" 
     ],
     "Temp_2": [
-         "https://ucarecdn.com/735dae47-577a-4b29-a229-7e579eb5b6c9/banner_temp2_twitter_substack.png",
-         "https://ucarecdn.com/4f77976e-bf2c-48ee-81d5-a5f684eb45b5/banner_temp2_linkedin_substack.png",
-         "https://ucarecdn.com/e6ed0d6b-76a4-4aee-b3ec-01a360e93d3b/banner_temp2_substack_emailheader.png"
+         "https://ucarecdn.com/7e516055-89b0-4915-9b0f-0d7b443f0bbf/banner_temp2_twitter_substack.png",
+         "https://ucarecdn.com/3bba3354-aba0-48f6-83b8-f9303e229ca5/banner_temp2_linkedin_substack.png",
+         "https://ucarecdn.com/d19592b4-5941-42fb-8614-abf25060ce10/banner_temp2_substack_email.png"
     ],
     "Temp_3": [
-        "https://ucarecdn.com/0ec5e2e8-1cac-465c-9872-bda9ccf21764/banner_temp3_twitter_substack.png",
-        "https://ucarecdn.com/3a3bd0f1-3a23-41a1-98a7-c09d4313c028/banner_temp3_linkedin_substack.png",
-        "https://ucarecdn.com/1749cf6a-385b-4624-9f59-53620d2c9115/banner_temp3_substack_emailheader.png"
+        "https://ucarecdn.com/7e7c32b2-6d48-4b03-bef1-acf9c972b78a/banner_temp3_twitter_substack.png",
+        "https://ucarecdn.com/5a395202-b860-4b01-a42c-0878f519b004/banner_temp3_linkedin_substack.png",
+        "https://ucarecdn.com/e01a114b-e0cf-4308-8b75-a3e0e4d759a5/banner_temp3_substack_email.png"
     ],
+    "Temp_4": [
+        "https://ucarecdn.com/c9142f0f-4dde-4185-87c9-fdc849485cde/banner_temp4_twitter_substack.png",
+        "https://ucarecdn.com/fabe16b7-2337-4246-bb95-893529973d3e/banner_temp4_linkedin_substack.png",
+        "https://ucarecdn.com/fdd67f40-62bb-4d0a-94fc-8fd5bb9a827f/banner_temp4_substack_email.png"
+    ],
+    "Temp_5 (Japan Special)": [
+        "https://ucarecdn.com/361b1a6f-5aa9-4adc-8466-c4d118fbe5f6/banner_temp5_twitter_substack.png",
+        "https://ucarecdn.com/aaed3146-fef8-46a5-9971-34da4f9b642d/banner_temp5_linkedin_substack.png",
+        "https://ucarecdn.com/a8ee3ebe-2029-4889-aa18-83914f80c00e/banner_temp5_substack_email.png"
+    ]
 }
 
 if st.button("Create Banner", type="primary"):
